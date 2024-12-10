@@ -1,0 +1,28 @@
+# Pastas do Visual Studio
+.vs/
+*.vs/
+*.vscode/
+
+# Arquivos temporários de build
+bin/
+obj/
+
+# Arquivos do sistema operacional
+*.log
+*.tmp
+*.DS_Store
+Thumbs.db
+
+# Arquivos do usuário no Visual Studio
+*.csproj.user
+
+# Arquivos de lock gerados por pacotes
+*.lock.json
+
+# Pasta de publicações locais (opcional, se você não publica diretamente no projeto)
+publish/
+
+# Outras pastas irrelevantes
+*.userosscache
+*.suo
+*.ide
