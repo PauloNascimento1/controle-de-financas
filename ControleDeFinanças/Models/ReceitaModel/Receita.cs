@@ -1,4 +1,4 @@
-﻿using ControleDeFinanças.Enums.Receita;
+﻿using ControleDeFinanças.Enums;
 using System.Globalization;
 
 namespace ControleDeFinanças.Models.ReceitaModel

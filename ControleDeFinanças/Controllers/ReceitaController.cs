@@ -1,4 +1,5 @@
-﻿using ControleDeFinanças.Enums.Receita;
+﻿using ControleDeFinanças.Data.Repository.Receita;
+using ControleDeFinanças.Enums;
 using ControleDeFinanças.Services.ReceitaService;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,12 +19,20 @@ namespace ControleDeFinanças.Controllers
         }
 
         [HttpPost]
-        public void ReceitaMensal(double valorReceita, MesEnum mesDeRegistro, int anoDeRegistro) 
+        public IActionResult AdicionarReceita(double valorReceita, MesEnum mesDeRegistro, int anoDeRegistro) 
         {
             _receitaService.AdicionarReceita( valorReceita, mesDeRegistro, anoDeRegistro);
 
-           // return Ok();
+           return Ok();
 
+        }
+
+        [HttpGet]
+        public string BuscarReceitaMensal(MesEnum mesDeRegistro, int anoDeRegistro)
+        {
+            var retornoGetReceita = _receitaService.BuscarReceitaMensal(mesDeRegistro, anoDeRegistro);
+
+            return retornoGetReceita;
         }
     }
 }

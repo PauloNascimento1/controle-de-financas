@@ -1,5 +1,5 @@
 ﻿using ControleDeFinanças.Data.Repository.Receita;
-using ControleDeFinanças.Enums.Receita;
+using ControleDeFinanças.Enums;
 using ControleDeFinanças.Models.ReceitaModel;
 
 
@@ -24,6 +24,14 @@ namespace ControleDeFinanças.Services.ReceitaService
 
         }
 
-        
+        public string BuscarReceitaMensal(MesEnum mesDeRegistro, int anoDeRegistro)
+        {
+            var retornoGetReceita = _receitaQuery.BuscarReceitaMensal( mesDeRegistro, anoDeRegistro);
+
+            return retornoGetReceita;
+        }
+
+
+
     }
 }

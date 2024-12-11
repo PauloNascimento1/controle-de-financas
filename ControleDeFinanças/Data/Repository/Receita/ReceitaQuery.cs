@@ -1,4 +1,5 @@
-﻿using ControleDeFinanças.Enums.Receita;
+﻿using ControleDeFinanças.Enums;
+using ControleDeFinanças.Services.ReceitaService;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using System.Globalization;
@@ -29,7 +30,7 @@ namespace ControleDeFinanças.Data.Repository.Receita
                     connection.Open();
                     Console.WriteLine("Conexão bem-sucedida!");
 
-                    using (SqlCommand command = new SqlCommand(postReceita, connection)) 
+                    using (SqlCommand command = new SqlCommand(postReceita, connection))
                     {
                         CultureInfo cultureInfo = new CultureInfo("pt-BR");
                         string valorReceitaFormatado = valorReceita.ToString("F2", cultureInfo);
@@ -51,5 +52,51 @@ namespace ControleDeFinanças.Data.Repository.Receita
             }
         }
 
+        public string BuscarReceitaMensal(MesEnum mesDeRegistro, int anoDeRegistro)
+        {
+            var connectionString = _configuration.GetConnectionString("DefaultConnection");
+
+            var getReceita = @"SELECT RECEITAMENSAL FROM Receitas WHERE MESDEREGISTRO = @mesDeRegistro AND ANODEREGISTRO = @anoDeRegistro";
+
+            string linhasConsultadas = string.Empty;
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+
+                try
+                {
+                    connection.Open();
+                    Console.WriteLine("Conexão bem-sucedida!");
+
+                    using (SqlCommand command = new SqlCommand(getReceita, connection))
+                    {
+
+                        command.Parameters.AddWithValue("@mesDeRegistro", mesDeRegistro.ToString());
+                        command.Parameters.AddWithValue("@anoDeRegistro", anoDeRegistro);
+
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                linhasConsultadas = (reader["RECEITAMENSAL"].ToString());
+                                Console.WriteLine($"Resultado: Linha encontrada, Valor {linhasConsultadas}");
+
+                                
+                            }
+                        }
+
+                        
+
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Erro: {ex.Message}");
+                }
+
+                return linhasConsultadas;
+            }
+        }
     }
 }

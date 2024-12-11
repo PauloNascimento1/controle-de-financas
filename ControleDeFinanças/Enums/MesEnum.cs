@@ -1,11 +1,11 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace ControleDeFinanças.Enums.Receita
+namespace ControleDeFinanças.Enums
 {
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum MesEnum
     {
-        
+
         Janeiro = 1,
         Fevereiro,
         Marco,
